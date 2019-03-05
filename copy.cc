@@ -2,7 +2,7 @@
  *        File: copy_file.cc
  *      Author: Gregory Sheets II
  *        Date: March 04, 2019
- * Description: Takes an input file and copies it exactly how it appears to 
+ * Description: Takes an input file and copies it exactly how it appears to
  *              an output file.
  */
 
@@ -25,10 +25,18 @@ int main(int argc, char const *argv[]) {
     cin >> inFileName;
     inStream.open(inFileName.c_str());
     //check for failure
+    if (inStream.fail()) { //if filename invalid, fail.
+      cout << "Error: file " << inFileName << " does not exist." <<endl;
+      exit(1);
+    }
     cout << "Enter the output file name: ";
     cin >> outFileName;
     outStream.open(outFileName.c_str());
     //check for failure
+    if (outStream.fail()) { //if filename invalid, fail
+      cout << "Error: file " << outFileName << " does not exist.";
+      exit(1);
+    }
     getCopy(inStream, outStream);
     return 0;
 }// main
